@@ -10,9 +10,6 @@ export class ImageModule implements IImageModule {
     }
 
     async transform() {
-        
-
-
         const arrBuff = await this._file.arrayBuffer()
         const buffer = Buffer.from(arrBuff)
         
