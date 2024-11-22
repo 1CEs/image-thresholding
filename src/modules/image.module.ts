@@ -58,24 +58,19 @@ export class ImageModule implements IImageModule {
         return `Image saved to ${outputPath}` 
     }
 
-    // apply(module: FilterModule, times: number = 3, type: FilterType) {
-    //     let filtered: TransformType = {} as TransformType
-
-    //     for(let i = 0; i < times; i++) {
-    //         switch(type) {
-    //             case 'median':
-    //                 filtered = module.medianFilter(3)
-    //                 break
-    //             case 'average':
-    //                 filtered = module.averageFilter(3)
-    //                 break
-    //             default: filtered = module.medianFilter(3)
-    //         }
-    //         module.transformedImage = filtered
-    //     }
-        
-    //     return filtered
-    // }
+    apply(threshold: number, img: TransformType) {
+        const binaryPixels = new Array(img.height).fill(0).map(() => new Array(img.width).fill(0))
+        for(let x = 0; x < img.width; x++) {
+            for(let y = 0; y < img.height; y++) {
+                binaryPixels[y][x] = img.pixels[y][x] > threshold ? 255 : 0
+            }
+        }
+        return {
+            width: img.width,
+            height: img.height,
+            pixels: binaryPixels
+        }
+    }
 
     private _grayscaleConverter(rgbImage: number[][]): number[][] {
         const grayscale: number[][] = []

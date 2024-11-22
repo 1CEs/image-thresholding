@@ -20,5 +20,5 @@ export interface IImageModule {
      * @param type type of filter like average or median
      * @returns return object value that filtered
      */
-    //apply: ( times: number, type: FilterType) => TransformType
+    apply: (threshold: number, img: TransformType) => TransformType
 }

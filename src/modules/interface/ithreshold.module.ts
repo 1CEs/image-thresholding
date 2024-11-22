@@ -1,4 +1,4 @@
 export interface IThresholdModule {
-    otsu: (img: TransformType) => Promise<TransformType>
+    otsu: (img: TransformType) => number
     createHistogram: (img: TransformType) => number[]
 }
