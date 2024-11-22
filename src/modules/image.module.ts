@@ -1,6 +1,7 @@
 import type { BunFile } from "bun"
 import type { IImageModule } from './interface/iimage.module'
 import sharp from "sharp"
+import { FilterModule } from "./filter.module"
 
 export class ImageModule implements IImageModule {
     private _file: BunFile
@@ -65,11 +66,16 @@ export class ImageModule implements IImageModule {
                 binaryPixels[y][x] = img.pixels[y][x] > threshold ? 255 : 0
             }
         }
-        return {
+
+        const filterModule = new FilterModule({
             width: img.width,
             height: img.height,
             pixels: binaryPixels
-        }
+        })
+
+        const filtered = filterModule.medianFilter()
+
+        return filtered
     }
 
     private _grayscaleConverter(rgbImage: number[][]): number[][] {
