@@ -8,7 +8,7 @@ import { ThresholdModule } from "./modules/threshold.module"
 async function main() {
     try {
         console.log('Running script')
-        const imagePath = 'images/jpg/img-3.jpg'
+        const imagePath = 'images/jpg/img-2.jpg'
         const imageModule = new ImageModule(imagePath)
         const transformed = await imageModule.transform()
 
